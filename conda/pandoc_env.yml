@@ -1,0 +1,13 @@
+name: pandoc-env
+channels:
+  - conda-forge
+dependencies:
+  - panflute
+  - pantable
+  - pandoc-plot
+  - pandoc-crossref
+  - pip
+  - pip:
+    - pandoc-include
+    - pandoc-latex-color
+

@@ -1,0 +1,25 @@
+name: py-env
+channels:
+  - anaconda
+  - conda-forge
+  - bioconda
+  - tallic
+dependencies:
+  - python
+  - pandas
+  - dfply
+  - plotnine
+  - jupyter
+  - numpy
+  - matplotlib
+  - seaborn
+  - scipy
+  - scikit-learn
+  - scikit-image
+  - pillow
+  - opencv
+  - openslide
+  - openslide-python
+  - mkdocs
+  - pystan
+    #- loompy
