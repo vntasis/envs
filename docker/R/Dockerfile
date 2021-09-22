@@ -1,4 +1,4 @@
-FROM rocker/r-ver:3.6.3
+FROM rocker/r-ver:4.0.4
 
 LABEL maintainer "Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
 	description "Docker image for R environment"
@@ -6,6 +6,7 @@ LABEL maintainer "Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
 # Install dependencies
 RUN apt-get update --fix-missing && \
         apt-get install -y \
+	less \
 	libz-dev \
 	libssl-dev \
 	libcurl4-openssl-dev \
@@ -15,7 +16,12 @@ RUN apt-get update --fix-missing && \
 	libpng-dev \
 	libjpeg-dev \
 	libbz2-dev \
-	liblzma-dev
+	liblzma-dev \
+	libcairo2-dev \
+	libglpk-dev \
+# X11 dependencies
+	libsm-dev \
+	libxt-dev
 
 # Install R packages
 #RUN R -e 'install.packages("littler")'
@@ -33,7 +39,7 @@ RUN install2.r \
 	gifski \
 	ggplotify \
 	devtools \
-	#paleteer \ not compatible with version 3.6.3
+	paletteer \
 	ggsci \
 	ggupset \
 	#tweenr \ already installed
@@ -51,7 +57,6 @@ RUN install2.r \
         gifski \
         ggfortify \
         Rtsne \
-        #scatterplot3d \ not compatible with version 3.6.3
         gt \
         tidyposterior \
         rstan \
@@ -65,18 +70,14 @@ RUN install2.r \
 
 # Install Bioconductor packages
 RUN Rscript -e "BiocManager::install(c('edgeR','limma','DESeq2','ComplexHeatmap','clusterProfiler','Sushi','genomation','fgsea'))"
+RUN Rscript -e "devtools::install_github('stemangiola/tidyHeatmap')"
 
 RUN install2.r \
  	# needs IRanges from bioconductor
-	tidygenomics \
+	tidygenomics
 	# requires ComplexHeatmap
-	tidyHeatmap
+	#tidyHeatmap
 
-
-# X11 dependencies
-RUN apt-get install -y \
-	libsm-dev \
-	libxt-dev
 
 # Add here more packages
 RUN install2.r \
