@@ -19,7 +19,9 @@ RUN apt-get update --fix-missing && \
 	liblzma-dev \
 	libcairo2-dev \
 	libglpk-dev \
-# X11 dependencies
+	# Required by rstan
+	libnode-dev \
+	# X11 dependencies
 	libsm-dev \
 	libxt-dev
 
