@@ -23,7 +23,10 @@ RUN apt-get update --fix-missing && \
 	libnode-dev \
 	# X11 dependencies
 	libsm-dev \
-	libxt-dev
+	libxt-dev \
+	# Clean up
+	&& apt-get autoremove \
+	&& apt-get clean
 
 # Install R packages
 #RUN R -e 'install.packages("littler")'
