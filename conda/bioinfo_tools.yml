@@ -13,15 +13,17 @@ dependencies:
   - gem3-mapper
   - bwa
   - fastqc
-    #  - multiqc
   - deeptools
   - bustools
   - cramtools
   - bedtools
-    #  - bedops
   - sra-tools
   - fastq-tools
   - entrez-direct
-    #  - ncbimeta
   - ucsc-liftover
   - rseqc
+    # - ncbimeta
+    # - bedops
+    # - multiqc
+    # - ucsc-gtftogenepred
+    # - ucsc-genepredtobed
