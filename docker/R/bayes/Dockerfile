@@ -1,7 +1,7 @@
 FROM rocker/r-ver:4.0.4
 
-LABEL maintainer "Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
-	description "Docker image for R environment for bayesian modelling"
+LABEL authors="Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
+	description="Docker image - R environment for bayesian modelling"
 
 # Install dependencies
 RUN apt-get update --fix-missing \
@@ -22,10 +22,15 @@ RUN apt-get update --fix-missing \
 # tidybayes imports coda
 RUN install2.r \
 	rstanarm \
-	tidyposterior \
+	#tidyposterior \
 	tidybayes \
+	bayestestR \
 	remotes \
 	&& r -e 'remotes::install_github("stan-dev/posterior")'
+
+
+# Clean up downloaded .tar.gz package files
+RUN rm -r /tmp/downloaded_packages/
 
 # Create a docker user and set home as the working directory
 RUN useradd -ms /bin/bash docker
