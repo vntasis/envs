@@ -22,6 +22,9 @@ dependencies:
   - entrez-direct
   - ucsc-liftover
   - rseqc
+  - rust-bio-tools
+  - fastuniq
+    # - fastx_toolkit
     # - ncbimeta
     # - bedops
     # - multiqc
