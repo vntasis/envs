@@ -23,7 +23,8 @@ dependencies:
   - ucsc-liftover
   - rseqc
   - rust-bio-tools
-  - fastuniq
+    # - fastuniq
+    # - fastp
     # - fastx_toolkit
     # - ncbimeta
     # - bedops
