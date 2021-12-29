@@ -1,0 +1,12 @@
+name: lsp
+channels:
+  - conda-forge
+dependencies:
+  - shellcheck
+  - r-lintr
+  - r-styler
+  - r-languageserver
+  - isort
+  - black
+  - flake8
+  - python-lsp-server
