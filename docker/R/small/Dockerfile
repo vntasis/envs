@@ -19,14 +19,14 @@ RUN apt-get update && \
 	libtcl8.6 \
 	libtk8.6 \
 	#
-#	libz-dev \
-#	libssl-dev \
-#	libcurl4-openssl-dev \
-#	libgsl-dev \
-#	cargo \
-#	libbz2-dev \
-#	liblzma-dev \
-#	libglpk-dev \
+	#libz-dev \
+	#libssl-dev \
+	#libcurl4-openssl-dev \
+	#libgsl-dev \
+	#cargo \
+	#libbz2-dev \
+	#liblzma-dev \
+	#libglpk-dev \
 	# X11 dependencies
 	libsm-dev \
 	libxt-dev \
@@ -39,22 +39,23 @@ RUN install2.r \
 	vroom \
 	devtools \
 	paletteer \
-        ggstatsplot \
-        ggpubr \
-        ggsignif \
-        ggfortify \
+	ggstatsplot \
+	ggpubr \
+	ggsignif \
+	ggfortify \
 	gganimate \
 	gifski \
 	ggplotify \
 	ggupset \
-        ggridges \
-        Rtsne \
+	ggridges \
+	ggpointdensity \
+	Rtsne \
 	sjstats \
 	restriktor \
 	dslabs
 
 # Install packages from github
-RUN r -e 'devtools::install_github("AckerDWM/gg3D")'
+RUN r -e 'devtools::install_github(c("AckerDWM/gg3D","thomasp85/patchwork"))'
 
 # Clean up downloaded packages
 RUN rm -r /tmp/downloaded_packages/
