@@ -5,7 +5,7 @@ LABEL maintainer "Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
 
 # Install dependencies
 RUN apt-get update --fix-missing && \
-        apt-get install -y \
+	apt-get install -y \
 	less \
 	libz-dev \
 	libssl-dev \
@@ -20,7 +20,7 @@ RUN apt-get update --fix-missing && \
 	libcairo2-dev \
 	libglpk-dev \
 	# Required by rstan
-	libnode-dev \
+	#libnode-dev \
 	# X11 dependencies
 	libsm-dev \
 	libxt-dev \
@@ -34,60 +34,62 @@ RUN install2.r \
 	tidyverse \
 	vroom \
 	caret \
+	mlr3 \
 	gplots \
-	BiocManager \
-	#rmarkdown \ already installed
-	gprofiler2 \
-	feather \
-	#data.table \ already installed
 	gganimate \
-	gifski \
 	ggplotify \
-	devtools \
+	gifski \
 	paletteer \
 	ggsci \
 	ggupset \
-	#tweenr \ already installed
-        workflowr \
-        seriation \
-        tidybayes \
-        ggridges \
-        #rstudio \
-        ggpubr \
-        #ggsignif \ already installed
-        mlr3 \
-        #modelr \ already installed
-        ggstatsplot \
-        Rfast \
-        gifski \
-        ggfortify \
-        Rtsne \
-        gt \
-        tidyposterior \
-        rstan \
-        ggmcmc \
-        loo \
-        coda \
-        bayesplot \
+	ggridges \
+	ggpubr \
+	ggstatsplot \
+	ggfortify \
+	ggpointdensity \
+	heatmaply \
+	gt \
+	devtools \
+	BiocManager \
+	gprofiler2 \
+	feather \
+	seriation \
+	Rfast \
+	Rtsne \
 	sjstats \
-	heatmaply
+	restriktor \
+	idr
+	# Not included anymore
+	#tidyposterior \
+	#workflowr \
+	#rstudio \
+	#rstan \
+	#tidybayes \
+	#ggmcmc \
+	#loo \
+	#coda \
+	#bayesplot \
 	#lpSolve
+	#modelr \ already installed
+	#ggsignif \ already installed
+	#tweenr \ already installed
+	#data.table \ already installed
+	#rmarkdown \ already installed
 
 # Install Bioconductor packages
-RUN Rscript -e "BiocManager::install(c('edgeR','limma','DESeq2','ComplexHeatmap','clusterProfiler','Sushi','genomation','fgsea'))"
-RUN Rscript -e "devtools::install_github('stemangiola/tidyHeatmap')"
+RUN r -e "BiocManager::install(c('edgeR','limma','DESeq2','ComplexHeatmap','clusterProfiler','Sushi','genomation','fgsea','vsn','apeglm','sva'))"
 
-RUN install2.r \
- 	# needs IRanges from bioconductor
-	tidygenomics
-	# requires ComplexHeatmap
-	#tidyHeatmap
-
+# Install packages from github
+RUN r -e "devtools::install_github(c('stemangiola/tidyHeatmap','thomasp85/patchwork','stephens999/ashr'))"
+#devtools::install_github("jespermaag/gganatogram")
 
 # Add here more packages
 RUN install2.r \
-	restriktor \
-	idr
+	# needs IRanges from bioconductor
+	tidygenomics
+
+# Clean up downloaded packages
+RUN rm -r /tmp/downloaded_packages/
 
 # Create a docker user and set home as the working directory
 RUN useradd -ms /bin/bash docker
