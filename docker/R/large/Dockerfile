@@ -77,7 +77,7 @@ RUN install2.r \
 	#rmarkdown \ already installed
 
 # Install Bioconductor packages
-RUN r -e "BiocManager::install(c('edgeR','limma','DESeq2','ComplexHeatmap','clusterProfiler','Sushi','genomation','fgsea','vsn','apeglm','sva'))"
+RUN r -e "BiocManager::install(c('edgeR','limma','DESeq2','ComplexHeatmap','clusterProfiler','Sushi','genomation','fgsea','vsn','apeglm','sva','variancePartition'))"
 
 # Install packages from github
 RUN r -e "devtools::install_github(c('stemangiola/tidyHeatmap','thomasp85/patchwork','stephens999/ashr'))"
