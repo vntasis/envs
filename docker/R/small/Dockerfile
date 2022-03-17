@@ -5,7 +5,7 @@ LABEL authors="Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
 
 # Install dependencies
 RUN apt-get update && \
-        apt-get install -y \
+	apt-get install -y \
 	# useful for viewing help pages
 	less \
 	#
