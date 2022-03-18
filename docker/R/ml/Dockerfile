@@ -20,7 +20,9 @@ RUN install2.r \
 	DALEXtra \
 	mlr3 \
 	mlr3learners \
-	caret
+	caret \
+	e1071 \
+	doParallel
 
 
 # Clean up downloaded packages
