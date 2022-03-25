@@ -10,4 +10,8 @@ dependencies:
   - pip:
     - pandoc-include
     - pandoc-latex-color
+    - pandoc-latex-barcode
+    - pandoc-latex-environment
+    - pandoc-latex-newpage
+    - pandoc-mustache
 
