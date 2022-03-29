@@ -16,6 +16,7 @@ RUN apt-get update && \
 # Install R packages
 RUN install2.r \
 	xgboost \
+	glmnet \
 	DALEX \
 	DALEXtra \
 	mlr3 \
