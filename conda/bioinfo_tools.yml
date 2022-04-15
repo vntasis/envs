@@ -32,3 +32,4 @@ dependencies:
     # - multiqc
     # - ucsc-gtftogenepred
     # - ucsc-genepredtobed
+    # - agat
