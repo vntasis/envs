@@ -15,6 +15,7 @@ RUN apt-get update && \
 
 # Install R packages
 RUN install2.r \
+	ISLR \
 	xgboost \
 	glmnet \
 	DALEX \
