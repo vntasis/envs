@@ -24,6 +24,7 @@ dependencies:
   - rseqc
   - rust-bio-tools
   - seqtk
+  - pygtftk
     # - fastuniq
     # - fastp
     # - fastx_toolkit
