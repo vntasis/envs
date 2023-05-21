@@ -2,35 +2,61 @@ name: bioinfo-tools
 channels:
   - bioconda
   - conda-forge
-  - eclarke
+    # for komplexity
+    # - eclarke
 dependencies:
-  - samtools
-  - bamtools
-  - fastq-pair
-  - komplexity
-  - picard
-  - blast
-  - gem3-mapper
-  - bwa
+    #----------------
+    # Quality Control
+    #----------------
   - fastqc
-  - deeptools
-  - bustools
-  - cramtools
-  - bedtools
-  - sra-tools
-  - fastq-tools
-  - entrez-direct
-  - ucsc-liftover
   - rseqc
-  - rust-bio-tools
+    # - trim-galore
+  - fastp
+  - multiqc
+    #--------------
+    # Fastq related
+    #--------------
+  - fastq-tools
   - seqtk
-  - pygtftk
-    # - fastuniq
-    # - fastp
+  - fq
+    # - komplexity
+    # - fqtk
     # - fastx_toolkit
-    # - ncbimeta
+    # - fqtools
+    # - fastq-pair
+    # - fastuniq
+    #-------------------------
+    # SAM/BAM/CRAM/VCF related
+    #-------------------------
+  - samtools
+    # - bamtools
+  - sambamba
+  - picard
+  - cramtools
+  - deeptools
+  - rust-bio-tools
+    #------------------------
+    # BED and GTF/GFF related
+    #------------------------
+  - bedtools
+  - pygtftk
+  - agat
     # - bedops
-    # - multiqc
     # - ucsc-gtftogenepred
     # - ucsc-genepredtobed
-    # - agat
+    #-----------------------------------
+    # Fetching data and metadata related
+    #-----------------------------------
+  - sra-tools
+  - entrez-direct
+    # - ncbimeta
+    #------
+    # Other
+    #------
+  - blast
+  - bioconvert
+  - hyperfine
+    # - ucsc-liftover
+    # - bustools
+    # - gem3-mapper
+    # - bwa
