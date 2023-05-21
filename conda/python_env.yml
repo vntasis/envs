@@ -10,6 +10,7 @@ dependencies:
   - dfply
   - plotnine
   - jupyter
+  - jupytext
   - numpy
   - matplotlib
   - seaborn
@@ -21,5 +22,6 @@ dependencies:
   - openslide
   - openslide-python
   - mkdocs
+  - typer
     #  - pystan
     #  - loompy
