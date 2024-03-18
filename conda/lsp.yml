@@ -5,8 +5,9 @@ dependencies:
   - shellcheck
   - r-lintr
   - r-styler
-  - r-languageserver
   - isort
   - black
   - flake8
-  - python-lsp-server
+  - pip
+  - pip:
+    - proselint
