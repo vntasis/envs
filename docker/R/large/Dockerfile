@@ -1,101 +1,58 @@
-FROM rocker/r-ver:4.0.4
+# syntax=docker/dockerfile:1
+FROM vntasis/r-env:base-4.3.3
 
 LABEL maintainer "Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
-	description "Docker image for R environment"
+    description "Docker image for R general bioinformatics environment"
+
+# Change to root user
+USER root
 
 # Install dependencies
-RUN apt-get update --fix-missing && \
-	apt-get install -y \
-	less \
-	libz-dev \
-	libssl-dev \
-	libcurl4-openssl-dev \
-	libxml2-dev \
-	libgsl-dev \
-	cargo \
-	libpng-dev \
-	libjpeg-dev \
-	libbz2-dev \
-	liblzma-dev \
-	libcairo2-dev \
-	libglpk-dev \
-	# Required by rstan
-	#libnode-dev \
-	# X11 dependencies
-	libsm-dev \
-	libxt-dev \
-	# Clean up
-	&& apt-get autoremove \
-	&& apt-get clean
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    # igraph dep
+    libglpk-dev \
+    # Rhtslib deps
+    libbz2-dev \
+    libcurl4-openssl-dev \
+    liblzma-dev \
+    # Clean up
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install R packages
-#RUN R -e 'install.packages("littler")'
-RUN install2.r \
-	tidyverse \
-	vroom \
-	caret \
-	mlr3 \
-	gplots \
-	gganimate \
-	ggplotify \
-	gifski \
-	paletteer \
-	ggsci \
-	ggupset \
-	ggridges \
-	ggpubr \
-	ggstatsplot \
-	ggfortify \
-	ggpointdensity \
-	heatmaply \
-	gt \
-	devtools \
-	BiocManager \
-	gprofiler2 \
-	feather \
-	seriation \
-	Rfast \
-	Rtsne \
-	sjstats \
-	restriktor \
-	idr
-	# Not included anymore
-	#tidyposterior \
-	#workflowr \
-	#rstudio \
-	#rstan \
-	#tidybayes \
-	#ggmcmc \
-	#loo \
-	#coda \
-	#bayesplot \
-	#lpSolve
-	#modelr \ already installed
-	#ggsignif \ already installed
-	#tweenr \ already installed
-	#data.table \ already installed
-	#rmarkdown \ already installed
+RUN install2.r -se \
+    BiocManager \
+    CMplot \
+    ggseqlogo \
+    gprofiler2 \
+    gt \
+    idr \
+    # Install Bioconductor packages
+    && r -e 'BiocManager::install(\
+    c(\
+        "clusterProfiler", \
+        "ComplexHeatmap", \
+        "DESeq2", \
+        "edgeR", \
+        "genomation", \
+        "ggbio", \
+        "karyoploteR", \
+        "limma", \
+        "plotgardener", \
+        "sva", \
+        "tidybulk", \
+        "tidySummarizedExperiment", \
+        "variancePartition", \
+        "vsn" \
+    ), update = TRUE, ask = FALSE)' \
+    # Install packages from github
+    && installGithub.r \
+    jeffsocal/tidyproteomics \
+    stemangiola/tidyHeatmap \
+    thomasp85/tidygraph \
+    # Clean up downloaded packages
+    && rm -rf /tmp/*
 
-# Install Bioconductor packages
-RUN r -e "BiocManager::install(c('edgeR','limma','DESeq2','ComplexHeatmap','clusterProfiler','Sushi','genomation','fgsea','vsn','apeglm','sva','variancePartition'))"
-
-# Install packages from github
-RUN r -e "devtools::install_github(c('stemangiola/tidyHeatmap','thomasp85/patchwork','stephens999/ashr'))"
-#devtools::install_github("jespermaag/gganatogram")
-
-# Add here more packages
-RUN install2.r \
-	# needs IRanges from bioconductor
-	tidygenomics
-
-# Clean up downloaded packages
-RUN rm -r /tmp/downloaded_packages/
-
-# Create a docker user and set home as the working directory
-RUN useradd -ms /bin/bash docker
-WORKDIR /home/docker
+# Change to docker user
 USER docker
-
-
-# Run R
-CMD ["R"]
