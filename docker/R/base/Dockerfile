@@ -22,15 +22,20 @@ RUN apt-get update && \
     libtk8.6 \
     # required by tidyverse
     libxml2-dev \
+    # for rendering reports
+    pandoc \
     # Clean up
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages
-RUN install2.r \
+RUN install2.r -se \
+    bench \
     devtools \
     dslabs \
     fakir \
+    furrr \
+    GGally \
     gganimate \
     ggforce \
     ggfortify \
@@ -43,6 +48,7 @@ RUN install2.r \
     ggstatsplot \
     ggupset \
     gifski \
+    lobstr \
     pheatmap \
     Rtsne \
     seriation \
@@ -59,13 +65,13 @@ RUN install2.r \
     viridis \
     wesanderson \
     # Install packages from github
-    && r -e 'devtools::install_github( \
-        c("AckerDWM/gg3D", \
-        "BlakeRMills/MetBrewer", \
-        "jaredhuling/jcolors", \
-        "johannesbjork/LaCroixColoR", \
-        "thomasp85/patchwork", \
-        "thomasp85/scico"))' \
+    && installGithub.r \
+    AckerDWM/gg3D \
+    BlakeRMills/MetBrewer \
+    jaredhuling/jcolors \
+    johannesbjork/LaCroixColoR \
+    thomasp85/patchwork \
+    thomasp85/scico \
     # Clean up downloaded packages
     && rm -rf /tmp/*
 
