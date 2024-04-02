@@ -29,23 +29,21 @@ RUN install2.r -se \
     gt \
     idr \
     # Install Bioconductor packages
-    && r -e 'BiocManager::install(\
-    c(\
-        "clusterProfiler", \
-        "ComplexHeatmap", \
-        "DESeq2", \
-        "edgeR", \
-        "genomation", \
-        "ggbio", \
-        "karyoploteR", \
-        "limma", \
-        "plotgardener", \
-        "sva", \
-        "tidybulk", \
-        "tidySummarizedExperiment", \
-        "variancePartition", \
-        "vsn" \
-    ), update = TRUE, ask = FALSE)' \
+    && /usr/local/lib/R/site-library/littler/examples/installBioc.r -eu \
+    clusterProfiler \
+    ComplexHeatmap \
+    DESeq2 \
+    edgeR \
+    genomation \
+    ggbio \
+    karyoploteR \
+    limma \
+    plotgardener \
+    sva \
+    tidybulk \
+    tidySummarizedExperiment \
+    variancePartition \
+    vsn \
     # Install packages from github
     && installGithub.r \
     jeffsocal/tidyproteomics \
