@@ -1,12 +1,11 @@
 name: dim-reduc
 channels:
   - conda-forge
+  - bioconda
 dependencies:
   - numpy
   - pandas
-  - pip
-  - pip:
-    - phate
+  - phate
   - plotnine
   - pymde
   - scikit-learn
@@ -14,4 +13,7 @@ dependencies:
   - seaborn
   - typer
   - umap-learn
+    #  - pip
+    #  - pip:
+    #    - phate
     #- shannonca
