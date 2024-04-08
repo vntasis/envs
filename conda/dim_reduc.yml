@@ -1,0 +1,17 @@
+name: dim-reduc
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - pandas
+  - pip
+  - pip:
+    - phate
+  - plotnine
+  - pymde
+  - scikit-learn
+  - scipy
+  - seaborn
+  - typer
+  - umap-learn
+    #- shannonca
