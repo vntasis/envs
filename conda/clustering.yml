@@ -1,0 +1,11 @@
+name: cluster
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - pandas
+  - plotnine
+  - scikit-fuzzy
+  - scikit-learn
+  - scipy
+  - typer
