@@ -1,34 +1,36 @@
-FROM vntasis/r-env:small
+# syntax=docker/dockerfile:1
+FROM vntasis/r-env:base-4.3.3
 
-LABEL authors="Vasilis F. Ntasis <vasilisntasis94@gmail.com>" \
-	description="Docker image - R environment for machine learning"
+LABEL description="Docker image - R environment for machine learning"
 
 # Change to root user
 USER root
 
-# Install dependencies
-RUN apt-get update && \
-	apt-get install -y \
-	libomp-dev \
-	&& apt-get clean
-
-
 # Install R packages
-RUN install2.r \
-	ISLR \
-	xgboost \
-	glmnet \
-	DALEX \
-	DALEXtra \
-	mlr3 \
-	mlr3learners \
-	caret \
-	e1071 \
-	doParallel
-
-
-# Clean up downloaded packages
-RUN rm -r /tmp/downloaded_packages/
+RUN install2.r -se \
+    # Modelling framework
+    tidymodels \
+    usemodels \
+    finetune \
+    multilevelmod \
+    baguette \
+    stacks \
+    easystats \
+    caret \
+    #mlr3 \
+    #mlr3learners \
+    # Models
+    xgboost \
+    glmnet \
+    e1071 \
+    # Explainers
+    DALEX \
+    DALEXtra \
+    # Other
+    ISLR \
+    bestNormalize \
+    # Clean up downloaded packages
+    && rm -rf /tmp/*
 
 # Change to docker user
 USER docker
